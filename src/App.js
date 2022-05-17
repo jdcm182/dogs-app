@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Select from "./components/Select";
-import Card from './components/Card'
+import Card from './components/Card';
+import getDog from './helpers/getDog';
 
 
 const initialDog = {
@@ -15,6 +16,18 @@ const initialDog = {
 function App() {
 
   const [dog, setDog] = useState(initialDog);
+
+  useEffect(() => {
+    updateDog();
+  }, []);
+
+  const updateDog = () => {
+    getDog()
+      .then((newDog) => {
+        setDog(newDog);
+        //console.log('newDog: ', newDog);
+      })
+  }
 
   return (
     <div className="app">
